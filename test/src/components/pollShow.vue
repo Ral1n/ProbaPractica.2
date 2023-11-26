@@ -1,7 +1,12 @@
 <script setup>
 import pollData from '../scripts/data';
+import useStore from '../store/store.js';
+import { ref } from 'vue';
+import { VueElement } from 'vue';
 
+const globalState = useStore();
 const props = defineProps(['intrebare']);
+const votat = ref(null);
 </script>
 
 <template>
@@ -14,35 +19,39 @@ const props = defineProps(['intrebare']);
         <div class="px-[32px] pt-[15px] pb-[24px]">
             Make a choice:
         </div>
-
-        <div class="pb-[88px]">
-            <div class="px-[32px] pb-[37px]" v-for="raspuns in intrebare.raspunsuri" :key="raspuns.id">
-            <input name={{intrebare.id}} id={{raspuns.id}} type="radio" class="h-[33px] w-[33px] align-middle">
-            <label for={{raspuns.id}} class="optiune pl-[19px] align-middle">
-                {{raspuns.nume}}
-            </label>
-        </div>
-        </div>
+        <fieldset>
+            <div class="pb-[88px]">
+                <div class="px-[32px] pb-[37px]" v-for="raspuns in intrebare.raspunsuri" :key="raspuns.id">
+                    <input @click="votat=raspuns.id" :name=intrebare.id :id=raspuns.id type="radio" class="h-[33px] w-[33px] align-middle">
+                    <label @click="votat=raspuns.id" :for=raspuns.id class="optiune pl-[19px] align-middle">
+                        {{raspuns.nume}}
+                    </label>
+                </div>
+            </div>
+        </fieldset>
 
         <div class="flex justify-between px-[32px] absolute bottom-[47px] w-full">
-            <button class="votare">
-                <span class="textVotare">
-                    Delete
-                </span>
-            </button>
-
-            <button class="votare">
-                <span class="textVotare">
-                    Vote
-                </span>
-            </button>
+            <div>
+                <button v-show="globalState.loggedIn" class="votare">
+                    <span class="textVotare">
+                        Delete
+                    </span>
+                </button>
+            </div>
+            <div>
+                <button v-show="votat" class="votare">
+                    <span class="textVotare">
+                        Vote
+                    </span>
+                </button>
+            </div>
         </div>
 
     </div>
 </template>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;300;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
     .casuta{
         border-radius: 26px;
         background: #FFF;

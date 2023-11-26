@@ -3,6 +3,12 @@ import theNavbar from './components/theNavbar.vue';
 import theFooter from './components/theFooter.vue';
 import pollShow from './components/pollShow.vue';
 import pollData from './scripts/data.js';
+import useStore from './store/store.js';
+import { storeToRefs } from 'pinia';
+import popupLogin from './components/popupLogin.vue';
+
+const globalState = useStore();
+const { modalOpen, loggedIn } = storeToRefs(globalState);
 </script>
 
 <template>
@@ -23,6 +29,8 @@ import pollData from './scripts/data.js';
         <pollShow :intrebare=intrebare />
     </div>
  </div>
+
+ <popupLogin />
 
 <theFooter />
 

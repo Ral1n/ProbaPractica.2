@@ -1,7 +1,7 @@
 <template>
     <nav class="h-[81px] umbra flex bg-white">
         <div class="py-[19px] px-[25px]">
-            <div class="h-[42px]" @click="loggedIn = !loggedIn">
+            <div class="h-[42px]">
                 <svg xmlns="http://www.w3.org/2000/svg" width="94" height="45" viewBox="0 0 94 45" fill="none">
                     <path d="M0 43.87V21.17H8.86C10.6036 21.1259 12.3372 21.4461 13.95 22.11C15.2814 22.6754 16.4133 23.6261 17.2 24.84C17.9404 26.1304 18.33 27.5922 18.33 29.08C18.33 30.5677 17.9404 32.0295 17.2 33.32C16.4078 34.529 15.2776 35.4784 13.95 36.05C12.3408 36.7272 10.6051 37.0512 8.86 37H1.79L3.25 35.48V43.88L0 43.87ZM3.25 35.79L1.79 34.17H8.79C10.4703 34.2909 12.14 33.8204 13.51 32.84C14.0182 32.3545 14.4228 31.7709 14.6991 31.1247C14.9755 30.4784 15.118 29.7829 15.118 29.08C15.118 28.3771 14.9755 27.6815 14.6991 27.0353C14.4228 26.389 14.0182 25.8055 13.51 25.32C12.1413 24.336 10.4715 23.862 8.79 23.98H1.79L3.25 22.36V35.79Z" fill="#FF1F66"/>
                     <path d="M28.58 44.07C26.9769 44.0955 25.3949 43.7026 23.99 42.93C22.6639 42.1934 21.5616 41.1119 20.8 39.8C20.008 38.4234 19.6036 36.858 19.63 35.27C19.5994 33.6847 20.0041 32.1213 20.8 30.75C21.5674 29.4537 22.6646 28.384 23.98 27.65C25.3876 26.8761 26.9741 26.4864 28.58 26.52C30.1796 26.4929 31.7596 26.875 33.17 27.63C34.4981 28.3469 35.5995 29.4206 36.35 30.73C37.1045 32.1261 37.4995 33.6881 37.4995 35.275C37.4995 36.8619 37.1045 38.4239 36.35 39.82C35.5968 41.1298 34.4963 42.2061 33.17 42.93C31.7657 43.7039 30.1833 44.0969 28.58 44.07ZM28.58 41.34C29.6275 41.3595 30.6618 41.1043 31.58 40.6C32.4449 40.0967 33.1489 39.358 33.61 38.47C34.1267 37.4839 34.3848 36.3829 34.36 35.27C34.3884 34.1599 34.1301 33.0612 33.61 32.08C33.1365 31.2013 32.4218 30.4762 31.55 29.99C30.641 29.4981 29.6237 29.2405 28.59 29.2405C27.5564 29.2405 26.5391 29.4981 25.63 29.99C24.7621 30.4846 24.0463 31.2074 23.56 32.08C23.0208 33.055 22.7515 34.1562 22.78 35.27C22.755 36.3866 23.024 37.4901 23.56 38.47C24.0421 39.3561 24.7581 40.0928 25.63 40.6C26.5318 41.1002 27.5489 41.3554 28.58 41.34Z" fill="#FF1F66"/>
@@ -18,18 +18,23 @@
         </div>
         <div class="flex flex-1 justify-end gap-[49px] mr-[33px]">
             <button class="buton" @click="but1.action">{{but1.name}}</button>
-            <button class="buton">{{but2.name}}</button>
+            <button class="buton" @click="globalState.closeModal()">{{but2.name}}</button>
         </div>
     </nav>
 </template>
 
 <script setup>
 import { ref, watch } from 'vue';
-let loggedIn = ref(false);
+import useStore from '../store/store.js';
+import { storeToRefs } from 'pinia';
+
+const globalState = useStore();
+const { loggedIn, modalOpen } = storeToRefs(globalState);
+
 let but1 = ref({name: 'Login', action: clickLogin});
 let but2 = ref({name: 'Register', action: ''});
 watch(loggedIn, () => {
-    if(loggedIn.value){
+    if(globalState.loggedIn){
         but1.value.name = 'Create poll';
         but2.value.name = 'Log out';
     }else{
@@ -37,8 +42,11 @@ watch(loggedIn, () => {
         but2.value.name = 'Register';
     }
 });
+watch(modalOpen, () => {
+    console.log(modalOpen.value);
+})
 function clickLogin(){
-    
+    globalState.openModal();
 }
 </script>
 
