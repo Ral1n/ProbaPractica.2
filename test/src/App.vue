@@ -3,12 +3,10 @@ import theNavbar from './components/theNavbar.vue';
 import theFooter from './components/theFooter.vue';
 import pollShow from './components/pollShow.vue';
 import pollData from './scripts/data.js';
-import useStore from './store/store.js';
-import { storeToRefs } from 'pinia';
 import popupLogin from './components/popupLogin.vue';
+import popupRegister from './components/popupRegister.vue';
+import createPoll from './components/createPoll.vue';
 
-const globalState = useStore();
-const { modalOpen, loggedIn } = storeToRefs(globalState);
 </script>
 
 <template>
@@ -16,7 +14,7 @@ const { modalOpen, loggedIn } = storeToRefs(globalState);
 <theNavbar />
  <div class="flex flex-row">
     <div class="basis-1/2">
-        <p class="scrisTestoasa px-[103px] py-[96px]">Opiniile sunt mai importante ca niciodată. Platformele de sondaje permit organizatorilor să culeagă feedback direct de la audiența lor și să înțeleagă mai bine nevoile și dorințele acesteia.</p>
+        <p class="scrisTestoasa px-[103px] py-[96px]">Opiniile sunt mai importante ca niciodată. Platformele de sondaje permit organizatorilor să culeagă feedback direct de la audiența lor și să înțeleagă mai bine nevoile și dorințele acesteia.</p>
     </div>
     <div class="basis-1/2">
         <img class="w-full" src="testoasa.png" >
@@ -30,7 +28,11 @@ const { modalOpen, loggedIn } = storeToRefs(globalState);
     </div>
  </div>
 
- <popupLogin />
+<popupLogin />
+
+<popupRegister />
+
+<createPoll />
 
 <theFooter />
 
