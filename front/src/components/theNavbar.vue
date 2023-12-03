@@ -1,8 +1,8 @@
 <template>
-    <nav class="h-[81px] umbra flex bg-white z-10">
-        <div class="py-[19px] px-[25px]">
-            <div class="h-[42px]">
-                <svg xmlns="http://www.w3.org/2000/svg" width="94" height="45" viewBox="0 0 94 45" fill="none">
+    <nav class="h-[34px] md:h-[81px] umbra flex items-center bg-white z-10">
+        <div class="md:py-[19px] px-[25px]">
+            <div class="">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-[36px] md:w-[94px]" viewBox="0 0 94 45" fill="none">
                     <path
                         d="M0 43.87V21.17H8.86C10.6036 21.1259 12.3372 21.4461 13.95 22.11C15.2814 22.6754 16.4133 23.6261 17.2 24.84C17.9404 26.1304 18.33 27.5922 18.33 29.08C18.33 30.5677 17.9404 32.0295 17.2 33.32C16.4078 34.529 15.2776 35.4784 13.95 36.05C12.3408 36.7272 10.6051 37.0512 8.86 37H1.79L3.25 35.48V43.88L0 43.87ZM3.25 35.79L1.79 34.17H8.79C10.4703 34.2909 12.14 33.8204 13.51 32.84C14.0182 32.3545 14.4228 31.7709 14.6991 31.1247C14.9755 30.4784 15.118 29.7829 15.118 29.08C15.118 28.3771 14.9755 27.6815 14.6991 27.0353C14.4228 26.389 14.0182 25.8055 13.51 25.32C12.1413 24.336 10.4715 23.862 8.79 23.98H1.79L3.25 22.36V35.79Z"
                         fill="#FF1F66" />
@@ -24,19 +24,28 @@
             </div>
         </div>
         <div class="flex flex-1 justify-end gap-[49px] mr-[33px]">
-            <button class="buton" @click="but1.action">{{ but1.name }}</button>
-            <button class="buton" @click="but2.action">{{ but2.name }}</button>
+            <button class="hidden md:block font-inter text-primary text-[10px] md:text-xl font-medium"
+                @click="but1.action">{{ but1.name
+                }}</button>
+            <button class="hidden md:block font-inter text-primary text-[10px] md:text-xl font-medium"
+                @click="but2.action">{{ but2.name }}</button>
+            <button class="visible md:hidden"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="10"
+                    viewBox="0 0 16 10" fill="none">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M0 0.75C0 0.551088 0.0790176 0.360322 0.21967 0.21967C0.360322 0.0790175 0.551088 0 0.75 0H15.25C15.4489 0 15.6397 0.0790175 15.7803 0.21967C15.921 0.360322 16 0.551088 16 0.75C16 0.948912 15.921 1.13968 15.7803 1.28033C15.6397 1.42098 15.4489 1.5 15.25 1.5H0.75C0.551088 1.5 0.360322 1.42098 0.21967 1.28033C0.0790176 1.13968 0 0.948912 0 0.75ZM0 5C0 4.80109 0.0790176 4.61032 0.21967 4.46967C0.360322 4.32902 0.551088 4.25 0.75 4.25H15.25C15.4489 4.25 15.6397 4.32902 15.7803 4.46967C15.921 4.61032 16 4.80109 16 5C16 5.19891 15.921 5.38968 15.7803 5.53033C15.6397 5.67098 15.4489 5.75 15.25 5.75H0.75C0.551088 5.75 0.360322 5.67098 0.21967 5.53033C0.0790176 5.38968 0 5.19891 0 5ZM0.75 8.5C0.551088 8.5 0.360322 8.57902 0.21967 8.71967C0.0790176 8.86032 0 9.05109 0 9.25C0 9.44891 0.0790176 9.63968 0.21967 9.78033C0.360322 9.92098 0.551088 10 0.75 10H15.25C15.4489 10 15.6397 9.92098 15.7803 9.78033C15.921 9.63968 16 9.44891 16 9.25C16 9.05109 15.921 8.86032 15.7803 8.71967C15.6397 8.57902 15.4489 8.5 15.25 8.5H0.75Z"
+                        fill="#04395E" />
+                </svg></button>
         </div>
     </nav>
 </template>
 
 <script setup>
 import { ref, watch } from 'vue';
-import useStore from '../store/store.js';
+import { useStore } from '@/store/store.js';
 import { storeToRefs } from 'pinia';
 
 const globalState = useStore();
-const { loggedIn, modalOpen } = storeToRefs(globalState);
+const { loggedIn } = storeToRefs(globalState);
 
 let but1 = ref({ name: 'Login', action: clickLogin });
 let but2 = ref({ name: 'Register', action: clickRegister });
@@ -53,9 +62,6 @@ watch(loggedIn, () => {
         but2.value.action = clickRegister;
     }
 });
-watch(modalOpen, () => {
-    console.log(modalOpen.value);
-})
 
 function clickLogin() {
     globalState.openModal();

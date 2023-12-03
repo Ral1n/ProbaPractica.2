@@ -5,7 +5,7 @@ import {
   Dialog,
   DialogPanel,
 } from '@headlessui/vue'
-import useStore from '../store/store.js';
+import { useStore } from '../store/store.js';
 import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
 

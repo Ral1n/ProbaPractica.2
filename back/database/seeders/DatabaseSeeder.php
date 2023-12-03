@@ -1,10 +1,11 @@
 <?php
 
-namespace Database\Seeders;
-
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Option;
 use Illuminate\Database\Seeder;
-use Faker\Factory;
+use App\Models\User;
+use App\Models\Poll;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,14 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-        $user = \App\Models\User::factory()->hasPolls(5)->create([
-            'email' => 'test@example.com',
-        ]);
-
-        dd($user);
-
-        // $polls = \App\Models\Poll::factory()->count(10)->for($user)->create();
-
+        User::factory(5)->has(Poll::factory(3)->has(Option::factory(4)))->create();
     }
 }
