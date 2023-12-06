@@ -24,12 +24,13 @@ getPolls();
     <theNavbar />
     <div class="flex flex-row">
         <div class="basis-1/2">
-            <p class="scrisTestoasa px-[103px] py-[96px]">Opiniile sunt mai importante ca niciodată. Platformele de sondaje
+            <p class="font-inter text-[10px] md:text-[36px] font-medium text-white px-[103px] py-[96px] md:py-[102px]">
+                Opiniile sunt mai importante ca niciodată. Platformele de sondaje
                 permit organizatorilor să culeagă feedback direct de la audiența lor și să înțeleagă mai bine nevoile și
                 dorințele acesteia.</p>
         </div>
         <div class="basis-1/2">
-            <img class="w-full" src="/testoasa.png">
+            <img class="w-[152px] md:w-full py-[92px]" src="/testoasa.png">
         </div>
 
     </div>
