@@ -6,17 +6,17 @@ import popupLogin from '@/components/popupLogin.vue';
 import popupRegister from '@/components/popupRegister.vue';
 import createPoll from '@/components/createPoll.vue';
 import { ref } from 'vue';
-import axios from 'axios';
+// import axios from 'axios';
 
 const pollData = ref([]);
 
-async function getPolls() {
-    axios.get('http://localhost/api/polls').then((raspuns) => {
-        pollData.value = raspuns.data;
-    })
-}
+// // // async function getPolls() {
+// // //     axios.get('http://localhost/api/polls').then((raspuns) => {
+// // //         pollData.value = raspuns.data;
+// // //     })
+// // }
 
-getPolls();
+// getPolls();
 
 </script>
 

@@ -35,7 +35,7 @@ function addOption() {
             enter-to="opacity-100 scale-100" leave="duration-200 ease-in" leave-from="opacity-100 scale-100"
             leave-to="opacity-0 scale-95">
             <DialogPanel
-              class="w-[1172px] min-h-[500px] transform overflow-hidden text-left align-middle transition-all panel relative">
+              class="w-[276px] md:w-[1172px] min-h-[500px] transform overflow-hidden text-left align-middle transition-all panel relative">
 
               <div class="grid grid-cols-1 pt-[43px] px-[85px]">
                 <div class="titluPopup text-center">
@@ -101,7 +101,8 @@ function addOption() {
                 </div>
 
                 <div class="mb-[43px] place-self-center">
-                  <button class="flex w-[225px] h-[50px] mt-[48px] bg-white rounded-[5px] items-center justify-center"
+                  <button
+                    class="flex w-[83px] md:w-[225px] h-[27px] md:h-[50px] mt-[48px] bg-white rounded-[5px] items-center justify-center"
                     @click="console.log(newPoll); newPoll = { question: '', type: 1, options: ['', ''] }">
                     <span class="loginText">
                       Create Poll
